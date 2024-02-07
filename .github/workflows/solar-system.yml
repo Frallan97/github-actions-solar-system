@@ -108,6 +108,7 @@ jobs:
           push: true
           tags: ghcr.io/frallan97/solar-system:${{ github.sha }}
 
+          
   dev-deploy:
     needs: docker
     runs-on: ubuntu-latest
