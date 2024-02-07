@@ -111,7 +111,8 @@ jobs:
   dev-deploy:
     name: Docker Build Push
     runs-on: ubuntu-latest
-    environment: development
+    environment: 
+      name: development
 
     steps:
     - name: Checkout Repository
@@ -130,4 +131,4 @@ jobs:
          kubeconfig: ${{ secrets.KUBECONFIG }}
 
     - name: Run Kubectl command
-      run: kubectl version --short -o yaml
+      run: kubectl version 
