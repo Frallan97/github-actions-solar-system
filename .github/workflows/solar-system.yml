@@ -123,4 +123,4 @@ jobs:
         with:
           method: kubeconfig
           kubeconfig: '${{ secrets.KUBECONFIG }}'
-      - run: kubectl get ns
+      - run: echo '${{ secrets.KUBECONFIG }}'
