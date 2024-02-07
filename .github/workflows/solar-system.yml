@@ -109,26 +109,17 @@ jobs:
           tags: ghcr.io/frallan97/solar-system:${{ github.sha }}
 
   dev-deploy:
-    name: Docker Build Push
+    needs: docker
     runs-on: ubuntu-latest
-    environment: 
+    environment:
       name: development
-
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
-
-    - name: Install kubectl
-      uses: azure/setup-kubectl@v3
-      with:
-        version: 'v1.26.0'
-      id: install
-
-    - name: Set kubectl context
-      uses: azure/k8s-set-context@v3
-      with:
-         method: kubeconfig
-         kubeconfig: ${{ secrets.KUBECONFIG }}
-
-    - name: Run Kubectl command
-      run: kubectl version 
+      - uses: actions/checkout@v4
+      - uses: azure/setup-kubectl@v3
+        with:
+          version: v1.26.0
+      - uses: azure/k8s-set-context@v3
+        with:
+          method: kubeconfig
+          kubeconfig: '${{ secrets.KUBECONFIG }}'
+      - run: kubectl version --short -o yaml
